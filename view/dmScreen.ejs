@@ -1,51 +1,50 @@
 <link rel="stylesheet" href="/bower-libs/comment-core-library/build/style.css"/>
 <script src="/bower-libs/comment-core-library/build/CommentCoreLibrary.js" ></script>
-<script src="/bower-libs/jquery/dist/jquery.js"></script>
-<script src="/socket.io/socket.io.js"></script>
+
 <div id='my-player' class='abp'style="height:100px;">
     <div id='my-comment-stage' class='container' style="height:100px;"></div>
 </div>
 <div id="news"/>
+
 <script>
-    $(function(){
-        var CM = new CommentManager(document.getElementById('my-comment-stage'));
-        CM.init();
+$(function(){
+    var CM = new CommentManager(document.getElementById('my-comment-stage'));
+    CM.init();
+    CM.start();
+    start = new Date().getTime();
+    tmr = setInterval(function(){
+        playhead = new Date().getTime() - start;
+        CM.time(playhead);
+    },42);
 
-        CM.start();
-        start = new Date().getTime();
-        tmr = setInterval(function(){
-            playhead = new Date().getTime() - start;
-            CM.time(playhead);
-        },42);
-
-        var socket = io('/dmScreen');
-        socket.on('DM', function (data) {
-            console.log(data);
-            var comment = {
-                sound_id: 0,
-                border: false,
-                color: '#ffffff',
-                date: parseInt(new Date().getTime()/1000),
-                dbid: 1,
-                hash: "D5332364",
-                mode: 1,
-                pool: 0,
-                position: "absolute",
-                size: 25,
-                stime: 0,
-                text: data
-            };
-            CM.send(comment);
-
-        });
-
-        socket.on('PIC', function (data) {
-            $('#news').prepend("<img src='"+data+"'/>");
-        });
-
-        socket.on('NEWS', function(data) {
-            $('#news').prepend("<p>"+data+"</p>")
-        });
+    var socket = io('/dmScreen');
+    socket.on('DM', function (data) {
+        console.log(data);
+        var comment = {
+            sound_id: 0,
+            border: false,
+            color: '#ffffff',
+            date: parseInt(new Date().getTime()/1000),
+            dbid: 1,
+            hash: "D5332364",
+            mode: 1,
+            pool: 0,
+            position: "absolute",
+            size: 25,
+            stime: 0,
+            text: data
+        };
+        CM.send(comment);
 
     });
+
+    socket.on('PIC', function (data) {
+        $('#news').prepend("<img src='"+data+"'/>");
+    });
+
+    socket.on('NEWS', function(data) {
+        $('#news').prepend("<p>"+data+"</p>")
+    });
+
+});
 </script>

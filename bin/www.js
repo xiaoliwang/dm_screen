@@ -9,7 +9,6 @@ var http = require('http'),
     dmScreen = require('../controller/dmScreen')
     websocket = require('../controller/websocket');
 
-
 var app = koa();
 
 app.use(function *(next){
@@ -23,7 +22,10 @@ app.use(function *(next){
     this.set('X-Response-Time',ms+'ms');
 });
 
-app.use(serve(__dirname+'/../public/res'));
+//线上使用nginx（using nginx online）
+if(config['app'].dev_mode){
+    app.use(serve(__dirname+'/../public/res'));
+}
 
 app.use(function *(next){
    try{
