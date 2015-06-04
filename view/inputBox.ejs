@@ -1,0 +1,15 @@
+<script src="/bower-libs/jquery/dist/jquery.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<input id="sendDm"/>
+<input id="click" type = "button" value = "确认"/>
+<script>
+    $(function(){
+        var socket = io('/sendDm');
+
+        $('#click').click(function(){
+            socket.emit('DM', $('#sendDm').val());
+            $('#sendDm').val('');
+        });
+
+    });
+</script>
