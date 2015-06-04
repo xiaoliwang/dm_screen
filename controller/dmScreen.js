@@ -15,9 +15,20 @@ dmScreen.get('/inputBox',function *(){
 });
 
 dmScreen.get('/backend',function *(){
-   yield this.render('backend', {
-       layout: 'layout'
-   });
+    yield this.render('login');
+});
+
+dmScreen.post('/backend',function *(){
+
+    if(this.body.password === 'helloworld'){
+        yield this.render('backend', {
+            layout: 'layout',
+            user: this.body.user
+        });
+    }else{
+        yield this.render('login');
+    }
+
 });
 
 module.exports = dmScreen;

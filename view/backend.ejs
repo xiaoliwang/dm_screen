@@ -1,13 +1,15 @@
 <input type='file' id="pic" />
 <input id="sendNews"/>
 <input id="click" type = "button" value = "确认"/>
+<input id="user" value="<%=user%>" type="hidden"/>
 <script>
 $(function(){
     var socket = io('/backend');
 
     //发送News
     $('#click').click(function(){
-        socket.emit('NEWS', $('#sendNews').val());
+        var text = $('#user').val()+":"+$('#sendNews').val();
+        socket.emit('NEWS', text);
         $('#sendNews').val('');
     });
 

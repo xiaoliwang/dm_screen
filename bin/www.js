@@ -5,6 +5,7 @@ var http = require('http'),
     render = require('koa-ejs'),
     mount = require('koa-mount'),
     serve = require('koa-static'),
+    parse = require('co-body'),
     config = require('../config'),
     dmScreen = require('../controller/dmScreen')
     websocket = require('../controller/websocket');
@@ -28,9 +29,18 @@ if(config['app'].dev_mode){
 }
 
 app.use(function *(next){
+    if(this.method === 'POST'){
+        var body = yield parse.form(this);
+        this.body = body;
+    }
+    yield next;
+});
+
+app.use(function *(next){
    try{
        yield next;
    } catch(e){
+       console.log(e);
        yield this.render('error');
    }
 });
