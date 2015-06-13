@@ -1,5 +1,11 @@
-<input id="sendDm"/>
-<input id="click" type = "button" value = "确认"/>
+<div style="padding-top:80%">
+    <div class="centerinput">
+        <input class="form-control" id="sendDm"/>
+    </div>
+    <div class="centerinput">
+        <botton  id="click" class="btn btn-danger" style="width:100%;">发送弹幕</botton>
+    </div>
+</div>
 <script>
 $(function(){
     var socket = io('/sendDm');

@@ -10,12 +10,14 @@ dmScreen.get('/',function *(){
 
 dmScreen.get('/inputBox',function *(){
     yield this.render('inputBox', {
-        layout: 'layout'
+        layout: 'mobile_layout'
     });
 });
 
 dmScreen.get('/backend',function *(){
-    yield this.render('login');
+    yield this.render('login', {
+        layout: 'layout'
+    });
 });
 
 dmScreen.post('/backend',function *(){
@@ -26,7 +28,10 @@ dmScreen.post('/backend',function *(){
             user: this.body.user
         });
     }else{
-        yield this.render('login');
+        yield this.render('login', {
+            layout: 'layout',
+            user: this.body.user
+        });
     }
 
 });

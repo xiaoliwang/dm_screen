@@ -1,15 +1,33 @@
-<input type='file' id="pic" />
-<input id="sendNews"/>
-<input id="click" type = "button" value = "确认"/>
+<div class="bigkonghang"></div>
+<div class="centerinput">
+    <div class="col-xs-10">
+        <input class="form-control" id="sendNews"/>
+    </div>
+    <div class="col-xs-2">
+        <input class="btn btn-danger" id="click"  type = "button" style="width:100%" value = "确认"/>
+    </div>
+</div>
+<div class="konghang"></div>
+<div class="centerinput">
+    <div class="col-xs-12">
+        <botton  id="sendpic" class="btn btn-default" style="width:100%;">发送图片</botton>
+        <input style="display:none;" type='file' id="pic" />
+    </div>
+</div>
 <input id="user" value="<%=user%>" type="hidden"/>
+
 <script>
 $(function(){
     var socket = io('/backend');
 
+    $('#sendpic').click(function(){
+       $('#pic').click();
+    });
+
     //发送News
     $('#click').click(function(){
-        var text = $('#user').val()+":"+$('#sendNews').val();
-        socket.emit('NEWS', text);
+        var text = $('#sendNews').val();
+        socket.emit('NEWS', text, $('#user').val());
         $('#sendNews').val('');
     });
 
@@ -23,7 +41,7 @@ $(function(){
         if ( input.files && input.files[0] ) {
             var FR= new FileReader();
             FR.onload = function(e) {
-                socket.emit('PIC',e.target.result);
+                socket.emit('PIC',e.target.result, $('#user').val());
             };
             FR.readAsDataURL( input.files[0] );
         }

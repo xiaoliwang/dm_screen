@@ -38,12 +38,23 @@ $(function(){
 
     });
 
-    socket.on('PIC', function (data) {
-        $('#news').prepend("<img src='"+data+"'/>");
+    var test = '<img class="leftimg" src="http://static.missevan.cn/mimages/icon01.png">';
+
+
+    socket.on('PIC', function (data, user) {
+        $('#news').prepend('<div class="leftd">' + test +
+                '<div class="speech left" >'+
+                '<img style="width:100%" src="'+data+'"/>'+
+                '</div></div>'
+        );
+        console.log(user);
     });
 
-    socket.on('NEWS', function(data) {
-        $('#news').prepend("<p>"+data+"</p>")
+    socket.on('NEWS', function(data, user) {
+        $('#news').prepend( '<div class="leftd">' + test +
+                '<div class="speech left" >'+data+'</div>'+
+        '</div>');
+        console.log(user);
     });
 
 });

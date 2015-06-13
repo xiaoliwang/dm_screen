@@ -48,6 +48,7 @@ app.use(function *(next){
 render(app,{
     root: '../view',
     layout: false,
+    cache: false,
     viewExt: 'ejs'
 });
 
