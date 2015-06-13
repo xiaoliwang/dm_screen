@@ -1,8 +1,8 @@
 <link rel="stylesheet" href="/bower-libs/comment-core-library/build/style.css"/>
 <script src="/bower-libs/comment-core-library/build/CommentCoreLibrary.js" ></script>
 
-<div id='my-player' class='abp'style="height:100px;">
-    <div id='my-comment-stage' class='container' style="height:100px;"></div>
+<div id='my-player' class='abp'style="width:100%;height:100px;">
+    <div id='my-comment-stage' class='container' style="width:100%;height:100px;"></div>
 </div>
 <div id="news"/>
 
@@ -19,7 +19,6 @@ $(function(){
 
     var socket = io('/dmScreen');
     socket.on('DM', function (data) {
-        console.log(data);
         var comment = {
             sound_id: 0,
             border: false,
