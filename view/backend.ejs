@@ -1,4 +1,4 @@
-<div class="bigkonghang"></div>
+<div id="dm-staff" class="centerinput container">
 <div class="centerinput">
     <div class="col-xs-10">
         <input class="form-control" id="sendNews"/>
@@ -7,7 +7,6 @@
         <input class="btn btn-danger" id="click"  type = "button" style="width:100%" value = "确认"/>
     </div>
 </div>
-<div class="konghang"></div>
 <div class="centerinput">
     <div class="col-xs-12">
         <botton  id="sendpic" class="btn btn-default" style="width:100%;">发送图片</botton>
@@ -15,9 +14,15 @@
     </div>
 </div>
 <input id="user" value="<%=user%>" type="hidden"/>
+<input id="usericoninput" value="<%=usericoninput%>" type="hidden"/>
+
+</div>
+<!-- ID 控制动作，class控制动作，此处为吊着冰激凌的M娘-->
+<div id="micecream" class="micecream m-small" ><img src="/img/login-right.png"></div>
 
 <script>
 $(function(){
+
     var socket = io('/backend');
 
     $('#sendpic').click(function(){
@@ -27,7 +32,7 @@ $(function(){
     //发送News
     $('#click').click(function(){
         var text = $('#sendNews').val();
-        socket.emit('NEWS', text, $('#user').val());
+        socket.emit('NEWS', text, $('#user').val(), $('#usericoninput').val());
         $('#sendNews').val('');
     });
 
@@ -41,7 +46,7 @@ $(function(){
         if ( input.files && input.files[0] ) {
             var FR= new FileReader();
             FR.onload = function(e) {
-                socket.emit('PIC',e.target.result, $('#user').val());
+                socket.emit('PIC',e.target.result, $('#user').val(),$('#usericoninput').val());
             };
             FR.readAsDataURL( input.files[0] );
         }

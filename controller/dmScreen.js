@@ -25,12 +25,13 @@ dmScreen.post('/backend',function *(){
     if(this.body.password === 'helloworld'){
         yield this.render('backend', {
             layout: 'layout',
-            user: this.body.user
+            user: this.body.user,
+            usericoninput: this.body.usericoninput
         });
     }else{
         yield this.render('login', {
             layout: 'layout',
-            user: this.body.user
+            user: this.body.user,
         });
     }
 

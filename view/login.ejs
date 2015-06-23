@@ -1,13 +1,36 @@
 <form class="centerinput" action="/dmScreen/backend" method="post">
-    <div class="centerinput">
-        <strong>用户名</strong>
-        <input class="form-control" name="user">
+    <div id="user-icon" class="user-icon"> 
+    <!--此处增加可选图片，完全是硬code 参照增加，并在dmScreen增加 别忘了！-->
+        <div class="user-icon-single user-icon-clicked" data-iconid="1"><img src="/img/icon/1.png" /></div>
+        <div class="user-icon-single" data-iconid="2"><img src="/img/icon/2.png" /></div>
+        <div class="user-icon-single" data-iconid="3"><img src="/img/icon/3.png" /></div>
+        <div class="user-icon-single" data-iconid="4"><img src="/img/icon/4.png" /></div>
+        <div class="user-icon-single" data-iconid="5"><img src="/img/icon/5.png" /></div>
+        <div class="user-icon-single" data-iconid="6"><img src="/img/icon/6.png" /></div>
+        <div class="user-icon-single" data-iconid="7"><img src="/img/icon/7.png" /></div>
+        <div class="user-icon-single" data-iconid="8"><img src="/img/icon/8.png" /></div>
+        <div class="user-icon-single" data-iconid="9"><img src="/img/icon/9.png" /></div>
+        <div class="user-icon-single" data-iconid="10"><img src="/img/icon/10.png" /></div>
     </div>
     <div class="centerinput">
-        <strong>密码</strong>
-        <input class="form-control" name="password">
+        <input class="form-control" placeholder="用户名" name="user">
     </div>
+    <div class="centerinput">
+        <input class="form-control" placeholder="密码" name="password">
+    </div>
+    <input id="usericoninput" name="usericoninput" value="1" type="hidden"/>
     <div class="centerinput">
         <button style="width:100%;" class="btn btn-danger" type="submit">登陆</button>
     </div>
 </form>
+<!-- ID 控制动作，class控制动作，此处为吊着冰激凌的M娘-->
+<div id="micecream" class="micecream m-small" ><img src="/img/login-right.png"></div>
+<script>
+$(function(){
+    $(".user-icon-single").click (function(){
+        $(".user-icon-single").removeClass("user-icon-clicked");
+        $(this).addClass("user-icon-clicked");
+        $("#usericoninput").attr("value",$(this).data("iconid"));
+    });
+});
+</script>

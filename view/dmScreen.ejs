@@ -1,11 +1,12 @@
 <link rel="stylesheet" href="/bower-libs/comment-core-library/build/style.css"/>
 <script src="/bower-libs/comment-core-library/build/CommentCoreLibrary.js" ></script>
-
+<div id="dmscreen-background">
+<div id="head-img" class="head-img"></div>
 <div id='my-player' class='abp'style="width:100%;height:100px;">
     <div id='my-comment-stage' class='container' style="width:100%;height:100px;"></div>
 </div>
 <div id="news"/>
-
+</div>
 <script>
 $(function(){
     var CM = new CommentManager(document.getElementById('my-comment-stage'));
@@ -37,10 +38,11 @@ $(function(){
 
     });
 
-    var test = '<img class="leftimg" src="http://static.missevan.cn/mimages/icon01.png">';
+    //var test = '<img class="leftimg" src="http://static.missevan.cn/avatars/icon01.png">';
 
 
-    socket.on('PIC', function (data, user) {
+    socket.on('PIC', function (data, user, icon) {
+        var test = '<img class="leftimg" src="/img/icon/'+icon+'.png">';
         $('#news').prepend('<div class="leftd">' + test +
                 '<div class="speech left" >'+
                 '<img style="width:100%" src="'+data+'"/>'+
@@ -49,7 +51,8 @@ $(function(){
         console.log(user);
     });
 
-    socket.on('NEWS', function(data, user) {
+    socket.on('NEWS', function(data, user, icon) {
+        var test = '<img class="leftimg" src="/img/icon/'+icon+'.png">';
         $('#news').prepend( '<div class="leftd">' + test +
                 '<div class="speech left" >'+data+'</div>'+
         '</div>');
