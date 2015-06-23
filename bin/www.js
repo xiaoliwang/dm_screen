@@ -2,6 +2,7 @@
 
 var http = require('http'),
     koa = require('koa'),
+    path = require('path'),
     render = require('koa-ejs'),
     mount = require('koa-mount'),
     serve = require('koa-static'),
@@ -11,6 +12,7 @@ var http = require('http'),
     websocket = require('../controller/websocket');
 
 var app = koa();
+var root_dir = path.resolve(__dirname, '.') + '/';
 
 app.use(function *(next){
     var start = new Date;
@@ -46,7 +48,7 @@ app.use(function *(next){
 });
 
 render(app,{
-    root: '../view',
+    root: root_dir + '../view',
     layout: false,
     cache: false,
     viewExt: 'ejs'
