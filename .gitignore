@@ -1,3 +1,4 @@
 node_modules/*
 public/res/bower-libs/*
+config.js
 .idea/*

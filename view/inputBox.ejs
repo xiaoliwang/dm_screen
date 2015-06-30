@@ -10,7 +10,7 @@
 </div>
 <script>
 $(function(){
-    var socket = io('/sendDm');
+    var socket = io('<%=locals.host%>/sendDm');
 
     $('#click').click(function(){
         socket.emit('DM', $('#sendDm').val());

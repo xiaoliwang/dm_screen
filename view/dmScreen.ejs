@@ -18,7 +18,7 @@ $(function(){
         CM.time(playhead);
     },42);
 
-    var socket = io('/dmScreen');
+    var socket = io('<%= locals.host%>/dmScreen');
     socket.on('DM', function (data) {
         var comment = {
             sound_id: 0,

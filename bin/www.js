@@ -8,12 +8,22 @@ var http = require('http'),
     serve = require('koa-static'),
     parse = require('co-body'),
     config = require('../config'),
-    dmScreen = require('../controller/dmScreen')
+    dmScreen = require('../controller/dmScreen'),
     websocket = require('../controller/websocket');
 
 var app = koa();
 var root_dir = path.resolve(__dirname, '.') + '/';
 
+//view层配置
+render(app,{
+    root: root_dir + '../view',
+    layout: false,
+    cache: false,
+    viewExt: 'ejs',
+    debug: config['app'].dev_mode
+});
+
+//添加http头的基本信息
 app.use(function *(next){
     var start = new Date;
 
@@ -30,6 +40,7 @@ if(config['app'].dev_mode){
     app.use(serve(__dirname+'/../public/res'));
 }
 
+//获取post的form表单
 app.use(function *(next){
     if(this.method === 'POST'){
         var body = yield parse.form(this);
@@ -38,6 +49,7 @@ app.use(function *(next){
     yield next;
 });
 
+//错误处理
 app.use(function *(next){
    try{
        yield next;
@@ -47,14 +59,9 @@ app.use(function *(next){
    }
 });
 
-render(app,{
-    root: root_dir + '../view',
-    layout: false,
-    cache: false,
-    viewExt: 'ejs'
-});
-
 app.use(mount('/dmScreen',dmScreen.middleware()));
+
+
 
 var server = http.createServer(app.callback()),
     io = require('socket.io')(server);

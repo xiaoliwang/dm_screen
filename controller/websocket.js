@@ -1,4 +1,17 @@
+var app_conf = require('../config').app;
+
+if(app_conf.distributed){
+    var redis_conf = require('../config').redis,
+        redisAdapter = require('socket.io-redis'),
+        redis = require('redis');
+}
+
 var websocket = function (io){
+    if(app_conf.distributed){
+        var pub = redis.createClient(redis_conf.port, redis_conf.address, {auth_pass: redis_conf.password}),
+            sub = redis.createClient(redis_conf.port, redis_conf.address, {detect_buffers: true, auth_pass: redis_conf.password} );
+        io.adapter( redisAdapter({pubClient: pub, subClient: sub}) );
+    }
 
     var dmScreen = io.of('/dmScreen'),
         backend = io.of('backend'),

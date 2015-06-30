@@ -23,7 +23,7 @@
 <script>
 $(function(){
 
-    var socket = io('/backend');
+    var socket = io('<%=locals.host%>/backend');
 
     $('#sendpic').click(function(){
        $('#pic').click();
