@@ -39,7 +39,7 @@
 <script>
 $(function(){
 
-    var socket = io('/backend');
+    var socket = io('<%=locals.host%>/backend');
 
     //发送背景图地址
     $(".backgroundimg-single").click (function(){
