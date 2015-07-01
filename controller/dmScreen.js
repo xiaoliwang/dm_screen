@@ -26,7 +26,8 @@ dmScreen.post('/backend',function *(){
         yield this.render('backend', {
             layout: 'layout',
             user: this.body.user,
-            usericoninput: this.body.usericoninput
+            usericoninput: this.body.usericoninput,
+            usericoncolorinput:this.body.usericoncolorinput
         });
     }else{
         yield this.render('login', {

@@ -39,6 +39,8 @@ app.use(function *(next){
 app.use(function *(next){
    try{
        yield next;
+       if(this.response.status===404)
+        yield this.render('error');
    } catch(e){
        console.log(e);
        yield this.render('error');

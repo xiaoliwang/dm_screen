@@ -9,6 +9,7 @@
 </div>
 <script>
 $(function(){
+    //定义头像颜色
     var CM = new CommentManager(document.getElementById('my-comment-stage'));
     CM.init();
     CM.start();
@@ -40,23 +41,24 @@ $(function(){
 
     //var test = '<img class="leftimg" src="http://static.missevan.cn/avatars/icon01.png">';
 
-
-    socket.on('PIC', function (data, user, icon) {
+    socket.on('PIC', function (data, user, icon, iconcolor) {
         var test = '<img class="leftimg" src="/img/icon/'+icon+'.png">';
         $('#news').prepend('<div class="leftd">' + test +
-                '<div class="speech left" >'+
+                '<div class="speech-triangle" style="border-color: transparent '+iconcolor+' transparent transparent;"></div><div class="speech left" style="background-color:'+iconcolor+'">'+
                 '<img style="width:100%" src="'+data+'"/>'+
                 '</div></div>'
         );
-        console.log(user);
     });
 
-    socket.on('NEWS', function(data, user, icon) {
+    socket.on('NEWS', function(data, user, icon,iconcolor) {
         var test = '<img class="leftimg" src="/img/icon/'+icon+'.png">';
         $('#news').prepend( '<div class="leftd">' + test +
-                '<div class="speech left" >'+data+'</div>'+
+                '<div class="speech-triangle" style="border-color: transparent '+iconcolor+' transparent transparent;"></div><div class="speech left" style="background-color:'+iconcolor+'">'+data+'</div>'+
         '</div>');
-        console.log(user);
+    });
+
+    socket.on('BACKGROUND', function(data) {
+        $("div#dmscreen-background").css("background-image","url("+data+")");
     });
 
 });

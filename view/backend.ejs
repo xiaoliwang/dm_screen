@@ -13,10 +13,26 @@
         <input style="display:none;" type='file' id="pic" />
     </div>
 </div>
+
 <input id="user" value="<%=user%>" type="hidden"/>
 <input id="usericoninput" value="<%=usericoninput%>" type="hidden"/>
-
+<input id="usericoncolorinput" value="<%=usericoncolorinput%>" type="hidden"/>
 </div>
+
+    <div id="backgroundimg" class="backgroundimg"> 
+    <!--此处增加可选图片，完全是硬code 参照增加，并在dmScreen增加 别忘了！-->
+        <div class="backgroundimg-single backgroundimg-clicked" data-iconid="1"><img src="/img/background/01.jpg" /></div>
+        <div class="backgroundimg-single" data-backgroundid="2"><img src="/img/background/02.jpg" /></div>
+        <div class="backgroundimg-single" data-backgroundid="3"><img src="/img/background/03.jpg" /></div>
+        <div class="backgroundimg-single" data-backgroundid="4"><img src="/img/background/04.jpg" /></div>
+        <div class="backgroundimg-single" data-backgroundid="5"><img src="/img/background/05.jpg" /></div>
+        <div class="backgroundimg-single" data-backgroundid="6"><img src="/img/background/06.jpg" /></div>
+        <div class="backgroundimg-single" data-backgroundid="7"><img src="/img/background/07.jpg" /></div>
+        <div class="backgroundimg-single" data-backgroundid="8"><img src="/img/background/08.jpg" /></div>
+        <div class="backgroundimg-single" data-backgroundid="9"><img src="/img/background/09.jpg" /></div>
+        <div class="backgroundimg-single" data-backgroundid="10"><img src="/img/background/10.jpg" /></div>
+    </div>
+
 <!-- ID 控制动作，class控制动作，此处为吊着冰激凌的M娘-->
 <div id="micecream" class="micecream m-small" ><img src="/img/login-right.png"></div>
 
@@ -25,6 +41,13 @@ $(function(){
 
     var socket = io('/backend');
 
+    //发送背景图地址
+    $(".backgroundimg-single").click (function(){
+        $(".backgroundimg-single").removeClass("backgroundimg-clicked");
+        $(this).addClass("backgroundimg-clicked");
+        socket.emit('BACKGROUND', $(this).find("img").attr("src"));
+    });
+
     $('#sendpic').click(function(){
        $('#pic').click();
     });
@@ -32,7 +55,7 @@ $(function(){
     //发送News
     $('#click').click(function(){
         var text = $('#sendNews').val();
-        socket.emit('NEWS', text, $('#user').val(), $('#usericoninput').val());
+        socket.emit('NEWS', text, $('#user').val(), $('#usericoninput').val(), $('#usericoncolorinput').val());
         $('#sendNews').val('');
     });
 
@@ -46,7 +69,7 @@ $(function(){
         if ( input.files && input.files[0] ) {
             var FR= new FileReader();
             FR.onload = function(e) {
-                socket.emit('PIC',e.target.result, $('#user').val(),$('#usericoninput').val());
+                socket.emit('PIC',e.target.result, $('#user').val(),$('#usericoninput').val(), $('#usericoncolorinput').val());
             };
             FR.readAsDataURL( input.files[0] );
         }

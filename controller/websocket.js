@@ -16,12 +16,16 @@ var websocket = function (io){
     //监听发布信息
     backend.on('connection', function(socket) {
 
-        socket.on('PIC',function(data, user,icon) {
-            dmScreen.emit('PIC',data, user,icon);
+        socket.on('PIC',function(data, user,icon,iconcolor) {
+            dmScreen.emit('PIC',data, user,icon,iconcolor);
         });
 
-        socket.on('NEWS',function(data, user,icon){
-            dmScreen.emit('NEWS',data, user,icon);
+        socket.on('NEWS',function(data, user,icon,iconcolor){
+            dmScreen.emit('NEWS',data, user,icon,iconcolor);
+        });
+
+        socket.on('BACKGROUND',function(data) {
+            dmScreen.emit('BACKGROUND',data);
         });
 
     });

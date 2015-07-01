@@ -1,16 +1,16 @@
 <form class="centerinput" action="/dmScreen/backend" method="post">
     <div id="user-icon" class="user-icon"> 
     <!--此处增加可选图片，完全是硬code 参照增加，并在dmScreen增加 别忘了！-->
-        <div class="user-icon-single user-icon-clicked" data-iconid="1"><img src="/img/icon/1.png" /></div>
-        <div class="user-icon-single" data-iconid="2"><img src="/img/icon/2.png" /></div>
-        <div class="user-icon-single" data-iconid="3"><img src="/img/icon/3.png" /></div>
-        <div class="user-icon-single" data-iconid="4"><img src="/img/icon/4.png" /></div>
-        <div class="user-icon-single" data-iconid="5"><img src="/img/icon/5.png" /></div>
-        <div class="user-icon-single" data-iconid="6"><img src="/img/icon/6.png" /></div>
-        <div class="user-icon-single" data-iconid="7"><img src="/img/icon/7.png" /></div>
-        <div class="user-icon-single" data-iconid="8"><img src="/img/icon/8.png" /></div>
-        <div class="user-icon-single" data-iconid="9"><img src="/img/icon/9.png" /></div>
-        <div class="user-icon-single" data-iconid="10"><img src="/img/icon/10.png" /></div>
+        <div class="user-icon-single user-icon-clicked" data-iconid="1" data-color="#20202C"><img src="/img/icon/1.png" /></div>
+        <div class="user-icon-single" data-iconid="2" data-color="#747594"><img src="/img/icon/2.png" /></div>
+        <div class="user-icon-single" data-iconid="3" data-color="#869431"><img src="/img/icon/3.png" /></div>
+        <div class="user-icon-single" data-iconid="4" data-color="#fdb9ba"><img src="/img/icon/4.png" /></div>
+        <div class="user-icon-single" data-iconid="5" data-color="#580607"><img src="/img/icon/5.png" /></div>
+        <div class="user-icon-single" data-iconid="6" data-color="#FBB3B4"><img src="/img/icon/6.png" /></div>
+        <div class="user-icon-single" data-iconid="7" data-color="#161f59"><img src="/img/icon/7.png" /></div>
+        <div class="user-icon-single" data-iconid="8" data-color="#CDAE75"><img src="/img/icon/8.png" /></div>
+        <div class="user-icon-single" data-iconid="9" data-color="#344773"><img src="/img/icon/9.png" /></div>
+        <div class="user-icon-single" data-iconid="10" data-color="#D47F60"><img src="/img/icon/10.png" /></div>
     </div>
     <div class="centerinput">
         <input class="form-control" placeholder="用户名" name="user">
@@ -19,6 +19,7 @@
         <input class="form-control" placeholder="密码" name="password">
     </div>
     <input id="usericoninput" name="usericoninput" value="1" type="hidden"/>
+    <input id="usericoncolorinput" name="usericoncolorinput" value="#869431" type="hidden"/>
     <div class="centerinput">
         <button style="width:100%;" class="btn btn-danger" type="submit">登陆</button>
     </div>
@@ -31,6 +32,7 @@ $(function(){
         $(".user-icon-single").removeClass("user-icon-clicked");
         $(this).addClass("user-icon-clicked");
         $("#usericoninput").attr("value",$(this).data("iconid"));
+        $("#usericoncolorinput").attr("value",$(this).data("color"));
     });
 });
 </script>
