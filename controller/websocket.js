@@ -33,6 +33,10 @@ var websocket = function (io){
             dmScreen.emit('PIC',data, user,icon,iconcolor);
         });
 
+        socket.on('DM', function (data) {
+            dmScreen.emit('DM',data);
+        });
+
         socket.on('NEWS',function(data, user,icon,iconcolor){
             dmScreen.emit('NEWS',data, user,icon,iconcolor);
         });

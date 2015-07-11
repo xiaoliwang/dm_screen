@@ -4,9 +4,20 @@
         <input class="form-control" id="sendNews"/>
     </div>
     <div class="col-xs-2">
-        <input class="btn btn-danger" id="click"  type = "button" style="width:100%" value = "确认"/>
+        <input class="btn btn-danger" id="news-click"  type = "button" style="width:100%" value = "确认"/>
     </div>
 </div>
+
+<div class="centerinput">
+    <div class="col-xs-8">
+        <input class="form-control" id="sendDm"/>
+    </div>
+    <div class="col-xs-4">
+        <input  id="dm-click" class="btn btn-danger" type = "button" style="width:100%;" value="发送弹幕" />
+    </div>
+</div>
+
+
 <div class="centerinput">
     <div class="col-xs-12">
         <botton  id="sendpic" class="btn btn-default" style="width:100%;">发送图片</botton>
@@ -53,10 +64,16 @@ $(function(){
     });
 
     //发送News
-    $('#click').click(function(){
+    $('#news-click').click(function(){
         var text = $('#sendNews').val();
         socket.emit('NEWS', text, $('#user').val(), $('#usericoninput').val(), $('#usericoncolorinput').val());
         $('#sendNews').val('');
+    });
+
+
+    $('#dm-click').click(function(){
+        socket.emit('DM', $('#sendDm').val());
+        $('#sendDm').val('');
     });
 
     //发送pic
