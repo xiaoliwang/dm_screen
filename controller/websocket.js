@@ -13,7 +13,7 @@ var websocket = function (io){
                 sub = redis.createClient(redis_conf.port, redis_conf.address, {detect_buffers: true, auth_pass: redis_conf.password} );
             io.adapter( redisAdapter({pubClient: pub, subClient: sub}) );
         }else{
-            io.adapter(redisAdapter({host:redis_conf.host, port: redis_conf.port}));
+            io.adapter(redisAdapter({host:redis_conf.address, port: redis_conf.port}));
         }
     }
 
