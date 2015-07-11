@@ -8,9 +8,13 @@ if(app_conf.distributed){
 
 var websocket = function (io){
     if(app_conf.distributed){
-        var pub = redis.createClient(redis_conf.port, redis_conf.address, {auth_pass: redis_conf.password}),
-            sub = redis.createClient(redis_conf.port, redis_conf.address, {detect_buffers: true, auth_pass: redis_conf.password} );
-        io.adapter( redisAdapter({pubClient: pub, subClient: sub}) );
+        if(redis_conf.password){
+            var pub = redis.createClient(redis_conf.port, redis_conf.address, {auth_pass: redis_conf.password}),
+                sub = redis.createClient(redis_conf.port, redis_conf.address, {detect_buffers: true, auth_pass: redis_conf.password} );
+            io.adapter( redisAdapter({pubClient: pub, subClient: sub}) );
+        }else{
+            io.adapter(redisAdapter({host:redis_conf.address, port: redis_conf.port}));
+        }
     }
 
     var dmScreen = io.of('/dmScreen'),
