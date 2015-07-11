@@ -31,7 +31,7 @@ dmScreen.post('/backend',function *(){
             layout: 'layout',
             user: this.body.user,
             usericoninput: this.body.usericoninput,
-            usericoncolorinput:this.body.usericoncolorinput
+            usericoncolorinput:this.body.usericoncolorinput,
             locals: locals
         });
     }else{

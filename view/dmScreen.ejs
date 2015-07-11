@@ -13,6 +13,7 @@ $(function(){
     var CM = new CommentManager(document.getElementById('my-comment-stage'));
     CM.init();
     CM.start();
+    CM.options.scroll.scale = 3;
     start = new Date().getTime();
     tmr = setInterval(function(){
         playhead = new Date().getTime() - start;
@@ -45,7 +46,7 @@ $(function(){
         var test = '<img class="leftimg" src="/img/icon/'+icon+'.png">';
         $('#news').prepend('<div class="leftd">' + test +
                 '<div class="speech-triangle" style="border-color: transparent '+iconcolor+' transparent transparent;"></div><div class="speech left" style="background-color:'+iconcolor+'">'+
-                '<img style="width:100%" src="'+data+'"/>'+
+                '<img style="max-height:300px" src="'+data+'"/>'+
                 '</div></div>'
         );
     });
