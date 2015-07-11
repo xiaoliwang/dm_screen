@@ -1,11 +1,11 @@
 <link rel="stylesheet" href="/bower-libs/comment-core-library/build/style.css"/>
 <script src="/bower-libs/comment-core-library/build/CommentCoreLibrary.js" ></script>
-<div id="dmscreen-background">
+<div id="dmscreen-background" style="background-image:url(/img/background/01.jpg)">
 <div id="head-img" class="head-img"></div>
 <div id='my-player' class='abp' style="width:100%;bottom: 0px;top: 204px;">
-    <div id='my-comment-stage' class='container' style="width:100%;height:100%;"></div>
+    <div id='my-comment-stage' class='container' style="width:100%;height:100%;">
+    <div id="news"/></div>
 </div>
-<div id="news"/>
 </div>
 <script>
 $(function(){
@@ -40,27 +40,63 @@ $(function(){
 
     });
 
+
+
     //var test = '<img class="leftimg" src="http://static.missevan.cn/avatars/icon01.png">';
 
     socket.on('PIC', function (data, user, icon, iconcolor) {
         var test = '<img class="leftimg" src="/img/icon/'+icon+'.png">';
         $('#news').prepend('<div class="leftd">' + test +
-                '<div class="speech-triangle" style="border-color: transparent '+iconcolor+' transparent transparent;"></div><div class="speech left" style="background-color:'+iconcolor+'">'+
+                '<div class="speech-triangle" style="border-color: transparent '+iconcolor+' transparent transparent;"></div><div class="speech left" style="background-color:'+iconcolor+';overflow: hidden;">'+
                 '<img style="max-height:300px" src="'+data+'"/>'+
                 '</div></div>'
         );
+        var $content =  $('#news').children().eq(0).find(".speech");
+        var $triangle =$('#news').children().eq(0).find(".speech-triangle");
+        var origWidth = $content.width();
+        var origHeight =  $content.height();
+        $content.css({width: origWidth * .25, height: origHeight * .25, left: origWidth * .01, top: origHeight * .3, opacity: .1})
+                                    .show()
+                                    .animate({width: origWidth+40, height: origHeight+40, left: 0, top: 0, opacity: 1}, 'easeOutBounce',
+                                        function() {
+                                            $triangle.show();
+                                        } );
+
+        $(".leftd").each(function(){
+            var position=$(this).position();
+            if(position.top>$(window).height()) {
+                $(this).remove();
+            }
+        });    
     });
 
     socket.on('NEWS', function(data, user, icon,iconcolor) {
         var test = '<img class="leftimg" src="/img/icon/'+icon+'.png">';
         $('#news').prepend( '<div class="leftd">' + test +
-                '<div class="speech-triangle" style="border-color: transparent '+iconcolor+' transparent transparent;"></div><div class="speech left" style="background-color:'+iconcolor+'">'+data+'</div>'+
+                '<div class="speech-triangle" style="border-color: transparent '+iconcolor+' transparent transparent;display:none;"></div><div class="speech left" style="background-color:'+iconcolor+';overflow: hidden;">'+data+'</div>'+
         '</div>');
-    });
+        var $content =  $('#news').children().eq(0).find(".speech");
+        var $triangle =$('#news').children().eq(0).find(".speech-triangle");
+        var origWidth = $content.width();
+        var origHeight =  $content.height();
+        $content.css({width: origWidth * .25, height: origHeight * .25, left: origWidth * .01, top: origHeight * .3, opacity: .1})
+                                    .show()
+                                    .animate({width: origWidth+40, height: origHeight+40, left: 0, top: 0, opacity: 1}, 'easeOutBounce',
+                                        function() {
+                                            $triangle.show();
+                                        } );
 
+        $(".leftd").each(function(){
+            var position=$(this).position();
+            if(position.top>$(window).height()) {
+                $(this).remove();
+            }
+        });
+    });
+/**
     socket.on('BACKGROUND', function(data) {
         $("div#dmscreen-background").css("background-image","url("+data+")");
-    });
+    });**/
 
 });
 </script>
