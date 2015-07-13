@@ -8,6 +8,19 @@
 <div id="news"/>
 </div>
 <script>
+var ban_words = [/广/g,/中国/g,/天朝/g,/爱国/g,/愤青/g,/粪青/g,/哈日/g,/政治/g,/美分/g,/五毛/g,/河南/,
+    /抄袭/g,/lol/g,/英雄联盟/g,/优越/g,/德玛西亚/g,/撸狗/g,/刀狗/g,/脑残/g,/自重/g,/你爹/g,/你妈/g,/你全家/,
+    /你家人/g,/吵架/g,/更烦/g,/有些人/g,/OK/g,/低端黑/g,/神烦/g,/吗B/g,/妈比/g,/特么/g,/吵起来/g,/他妈/g,/CNM/,
+    /QNMLGB/g,/去年买了个表/g,/SB/g,/TM/g,/翔/g,/屎,粑粑/g,/大便/g,/呵呵/g,/恶心/g,/小学生/g,/食尸鬼/g,/刀剑/,
+    /巨人/g,/兵长/g,/狗粉/g,/tfboys/g,/掏粪/g,/王俊凯/g,/王源/g,/千玺/g,/exo/g,/意义不明/g,/利艾/g,/小天使/,
+    /腐/g,/bl/g,/日漫痴/g,/死宅男/g,/acer/g,/b狗/g,/隔壁/g,/婊/g,/优越/g,/郭敬明/g,/郭比特人/g,/小四/g,/小时代/,
+    /爵迹/g,/小号/g,/密集恐惧症/g,/强迫症/g,/檀木/g,/国语/g,/粤语/g,/习近平/g,/温家宝/g,/胡锦涛/g,/李克强/g,/毛泽东/,
+    /朱德/g,/邓小平/g,/周恩来/g,/习习/g,/蛤蛤/g,/长者续命/g,/不朽尸王/g,/腊肉/g,/水晶棺/g,/矮人战车/g,/拉萨之虎/g,/公安/,
+    /机关/g,/共产党/g,/法轮/g,/轮子功/g,/3p/g,/4p/g,/5p/g,/6p/g,/小日本/g,/纳粹/g,/大东亚共荣圈/g,/鸡巴/g,/JB/g,/杰宝/g,/奶子/,
+    /乳房/g,/大奶/g,/睾丸/g,/阴茎/g,/阴蒂/g,/屁眼/g,/肛门/g,/老汉推车/g,/观音坐莲/g,/老树盘根/g,/69/g,/背入式/g,/坐上来自己动/,
+    /贱/g,/骚/g,/大保健/g,/波推/g,/胸推/g
+]
+
 $(function(){
     //定义头像颜色
     var CM = new CommentManager(document.getElementById('my-comment-stage'));
@@ -22,6 +35,9 @@ $(function(){
 
     var socket = io('<%= locals.host%>/dmScreen');
     socket.on('DM', function (data) {
+        ban_words.forEach(function(value,index){
+            data = data.replace(value,'*'.repeat(value.source.length));
+        });
         var comment = {
             sound_id: 0,
             border: false,
