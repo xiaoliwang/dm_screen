@@ -3,6 +3,17 @@ var Router = require('koa-router'),
 
 var dmScreen = new Router();
 
+var password = ['1iNyUGqSWJxwcgzeVTY5H5eDC',
+    'CST49EHBRhtzgl32iojdlxN8Y',
+    'po03HgSZeqOc9M9FRiXr4pm7y',
+    'jQEwaZIk9Nm8wVlJdf6zQgLmZ',
+    'jl2O7sqlK8qRPXAzRWUvZfq32',
+    'Fd14DJGRxHjsp62DJhTVKw01K',
+    'IL2XALvsCH0a2L5IN9Vv66D5Q',
+    'zRHOzbCqihhdGBrsSzFtgQzY7',
+    '1GROtVaQRrMVbCkibMTFtyaEs',
+    'fzJ1Wp7iw2jUFo2RZo6jDYNyW'];
+
 dmScreen.get('/',function *(){
     yield this.render('dmScreen', {
         layout: 'layout',
@@ -26,7 +37,7 @@ dmScreen.get('/backend',function *(){
 
 dmScreen.post('/backend',function *(){
 
-    if(this.body.password === 'helloworld'){
+    if(password.indexOf(this.body.password) !== -1){
         yield this.render('backend', {
             layout: 'layout',
             user: this.body.user,
