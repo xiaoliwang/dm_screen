@@ -49,7 +49,12 @@ var websocket = function (io){
             dmScreen.emit('BACKGROUND',data);
         });
 
+        socket.on('SWITCH', function(){
+           dmScreen.emit('SWITCH');
+        });
     });
+
+    //关闭弹幕
 
 }
 

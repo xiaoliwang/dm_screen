@@ -19,7 +19,9 @@ var ban_words = [/广/g,/中国/g,/天朝/g,/爱国/g,/愤青/g,/粪青/g,/哈�
     /机关/g,/共产党/g,/法轮/g,/轮子功/g,/3p/g,/4p/g,/5p/g,/6p/g,/小日本/g,/纳粹/g,/大东亚共荣圈/g,/鸡巴/g,/JB/g,/杰宝/g,/奶子/,
     /乳房/g,/大奶/g,/睾丸/g,/阴茎/g,/阴蒂/g,/屁眼/g,/肛门/g,/老汉推车/g,/观音坐莲/g,/老树盘根/g,/69/g,/背入式/g,/坐上来自己动/,
     /贱/g,/骚/g,/大保健/g,/波推/g,/胸推/g
-]
+];
+
+var isOpen = true;
 
 $(function(){
     //定义头像颜色
@@ -35,6 +37,7 @@ $(function(){
 
     var socket = io('<%= locals.host%>/dmScreen');
     socket.on('DM', function (data) {
+        if(!isOpen) return;
         ban_words.forEach(function(value,index){
             data = data.replace(value,'*'.repeat(value.source.length));
         });
@@ -108,6 +111,10 @@ $(function(){
                 $(this).remove();
             }
         });
+    });
+
+    socket.on('SWITCH',function(){
+        isOpen = !isOpen;
     });
 /**
     socket.on('BACKGROUND', function(data) {

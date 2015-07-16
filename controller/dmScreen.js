@@ -38,12 +38,15 @@ dmScreen.get('/backend',function *(){
 dmScreen.post('/backend',function *(){
 
     if(password.indexOf(this.body.password) !== -1){
+        var isShow = 0;
+        if(this.body.password === 'CST49EHBRhtzgl32iojdlxN8Y') isShow = 1;
         yield this.render('backend', {
             layout: 'layout',
             user: this.body.user,
             usericoninput: this.body.usericoninput,
             usericoncolorinput:this.body.usericoncolorinput,
-            locals: locals
+            locals: locals,
+            isShow: isShow
         });
     }else{
         yield this.render('login', {
