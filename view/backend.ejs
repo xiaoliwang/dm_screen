@@ -25,11 +25,13 @@
     </div>
 </div>
 
-<div class="centerinput" <% if (!isShow) {%> style="display:none;" <%};%>>
+<% if (isShow) { %>
+<div class="centerinput">
     <div class="col-xs-12">
         <botton  id="switch" class="btn btn-default" style="width:100%;">弹幕开关</botton>
     </div>
 </div>
+<% }; %>
 
 <input id="user" value="<%=user%>" type="hidden"/>
 <input id="usericoninput" value="<%=usericoninput%>" type="hidden"/>
