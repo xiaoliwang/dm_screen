@@ -50,7 +50,8 @@ div.head-img {
   left: 0;
   right: 0;
   min-width: 1200px;
-  background: url('/img/dmscreenhead.png') center top no-repeat;
+  background-color: #fff;
+  background: url('/img/dmscreenhead.jpg') center top no-repeat;
   -moz-box-shadow: 0 0 5px #000;
   -webkit-box-shadow: 0 0 5px #000;
   box-shadow: 0 0 5px #000;
